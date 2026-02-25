@@ -1,10 +1,11 @@
 import torch
-import torch.nn as nn
-import torch.optim as optim
 from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
 
-transforms = transforms.ToTensor()
+transforms = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5), (0.5))
+])
 
 data = datasets.MNIST(root = './data', train = True, download = True, transform = transforms)
 
@@ -14,8 +15,11 @@ dataiter = iter(data_loader)
 images, labels = next(dataiter)
 print(torch.min(images), torch.max(images))
 
+print(f"Total images in dataset: {len(data)}")
+print(torch.min(images), torch.max(images))
 
 img = images[0].squeeze()
+print(img.shape)
 plt.imshow(img, cmap='gray')
 plt.title(f'label: {labels[0]}')
 plt.show()
