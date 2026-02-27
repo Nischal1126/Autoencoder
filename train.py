@@ -8,7 +8,7 @@ model = Autoencoder()
 criterion = nn.MSELoss()
 optimizer = torch.optim.AdamW(model.parameters(), lr= 1e-3, weight_decay= 1e-5)
 
-epochs = 10
+epochs = 20
 outputs = []
 
 for epoch in range(epochs):
@@ -23,4 +23,7 @@ for epoch in range(epochs):
 
     print(f"Epoch:{epoch + 1}, Loss: {loss.item():.4f}")
     outputs.append((epoch, img, recon))
+
+PATH = "model_weights.pth"
+torch.save(model.state_dict(), PATH)
 

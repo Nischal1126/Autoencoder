@@ -1,6 +1,5 @@
 import torch
 from torchvision import datasets, transforms
-import matplotlib.pyplot as plt
 
 transforms = transforms.Compose([
     transforms.ToTensor(),
@@ -19,8 +18,5 @@ print(f"Total images in dataset: {len(data)}")
 print(torch.min(images), torch.max(images))
 
 img = images[0].squeeze()
-print(img.shape)
-plt.imshow(img, cmap='gray')
-plt.title(f'label: {labels[0]}')
-plt.show()
+
 
