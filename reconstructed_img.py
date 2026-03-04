@@ -1,12 +1,12 @@
 import matplotlib.pyplot as plt
 from torchvision import transforms
 from PIL import Image
-from model import Autoencoder
+from model import AutoencoderCNN
 import torch
 
 data_path = "image.png"
 
-model = Autoencoder()
+model = AutoencoderCNN()
 model.load_state_dict(torch.load("model_weights.pth"))
 model.eval()
 
@@ -19,7 +19,7 @@ transform = transforms.Compose([
 
 img = Image.open(data_path)
 img_tensor = transform(img).unsqueeze(0)
-img_tensor = img_tensor.view(1, -1)
+# img_tensor = img_tensor.view(1, -1)
 
 
 with torch.no_grad():
@@ -28,4 +28,5 @@ with torch.no_grad():
 recon_img = recon_img.squeeze().detach().numpy().reshape(28, 28)
 
 plt.imshow(recon_img)
+plt.savefig("reconstructed_img.png")
 plt.show()

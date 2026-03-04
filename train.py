@@ -1,10 +1,10 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from model import Autoencoder
+from model import AutoencoderCNN
 from dataloader import data_loader
 
-model = Autoencoder()
+model = AutoencoderCNN()
 criterion = nn.MSELoss()
 optimizer = torch.optim.AdamW(model.parameters(), lr= 1e-3, weight_decay= 1e-5)
 
@@ -13,7 +13,6 @@ outputs = []
 
 for epoch in range(epochs):
     for (img, _) in data_loader:
-        img = img.reshape(-1, 28*28)
         recon = model(img)
         loss = criterion(recon, img)
 
